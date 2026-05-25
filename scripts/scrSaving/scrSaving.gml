@@ -1,6 +1,42 @@
 #macro jsonNAME "angelkid.json"
 #macro compatibilityVERSION 0
 
+function defaultSETTINGS()
+{
+	return {
+		MASTER_VOLUME: 1.0,
+		FULLSCREEN: false
+	};
+}
+
+function applySETTINGS(settings)
+{
+	if (is_undefined(settings) || !is_struct(settings)) {
+		settings = defaultSETTINGS();
+	}
+
+	settings.MASTER_VOLUME = clamp(settings.MASTER_VOLUME, 0, 1);
+	audio_master_gain(settings.MASTER_VOLUME, 0);
+
+	if (window_get_fullscreen() != settings.FULLSCREEN) {
+		window_set_fullscreen(settings.FULLSCREEN);
+	}
+}
+
+function saveSETTINGS()
+{
+	if (!variable_global_exists("SAVE") || !is_struct(global.SAVE)) {
+		return;
+	}
+
+	if (!variable_struct_exists(global.SAVE, "SETTINGS") || !is_struct(global.SAVE.SETTINGS)) {
+		global.SAVE.SETTINGS = defaultSETTINGS();
+	}
+
+	applySETTINGS(global.SAVE.SETTINGS);
+	jsonSAVE();
+}
+
 function defaultSAVE()
 {
 	var struct =
@@ -10,7 +46,8 @@ function defaultSAVE()
 		WORLD: 0,
 		STAGE: 0,
 		CLEARED_WORLDS: [],
-		CLEARED_STAGES: []
+		CLEARED_STAGES: [],
+		SETTINGS: defaultSETTINGS()
 	};
 	
 	for (var i = 0; i < worlds.count; i++) { struct.CLEARED_STAGES[i] = []; }

@@ -2,7 +2,7 @@
   "$GMProject":"v1",
   "%Name":"Angel Kid",
   "AudioGroups":[
-    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -69,9 +69,11 @@
     {"id":{"name":"oJayCopterBomb","path":"objects/oJayCopterBomb/oJayCopterBomb.yy",},},
     {"id":{"name":"oLadder","path":"objects/oLadder/oLadder.yy",},},
     {"id":{"name":"oMainMenu","path":"objects/oMainMenu/oMainMenu.yy",},},
+    {"id":{"name":"oOptionsMenu","path":"objects/oOptionsMenu/oOptionsMenu.yy",},},
     {"id":{"name":"oMollyWopWally","path":"objects/oMollyWopWally/oMollyWopWally.yy",},},
     {"id":{"name":"oNPCTemplate","path":"objects/oNPCTemplate/oNPCTemplate.yy",},},
     {"id":{"name":"oPBJProjectile","path":"objects/oPBJProjectile/oPBJProjectile.yy",},},
+    {"id":{"name":"oPauseMenu","path":"objects/oPauseMenu/oPauseMenu.yy",},},
     {"id":{"name":"oPlayer","path":"objects/oPlayer/oPlayer.yy",},},
     {"id":{"name":"oPunchingBagJoe","path":"objects/oPunchingBagJoe/oPunchingBagJoe.yy",},},
     {"id":{"name":"oShelldon","path":"objects/oShelldon/oShelldon.yy",},},

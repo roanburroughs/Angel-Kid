@@ -8,7 +8,7 @@ menuItems = [
     { sprite: sMM_AngelMode, enabled: true, targetRoom: rmStage1, notice: "" },
     { sprite: sMM_TimeAttack, enabled: false, targetRoom: noone, notice: "TIME ATTACK COMING SOON" },
     { sprite: sMM_Competition, enabled: false, targetRoom: noone, notice: "COMPETITION COMING SOON" },
-    { sprite: sMM_Options, enabled: false, targetRoom: noone, notice: "OPTIONS COMING SOON" }
+    { sprite: sMM_Options, enabled: true, targetRoom: noone, notice: "" }
 ];
 
 selectedIndex = 0;
@@ -20,6 +20,7 @@ menuSpacing = 78;
 noticeText = "";
 noticeTimer = 0;
 noticeDuration = room_speed;
+optionsOpen = false;
 
 selectNEXT = function(_direction) {
     var itemCount = array_length(menuItems);
@@ -32,6 +33,13 @@ activateSELECTED = function() {
     if (item.sprite == sMM_Options) {
         var optionsMenuSound = sndOptionsMenu;
         audio_play_sound(optionsMenuSound, 0, false);
+
+        if (!optionsOpen) {
+            var optionsInstance = instance_create_layer(0, 0, "Instances", oOptionsMenu);
+            optionsInstance.callerId = id;
+            optionsOpen = true;
+        }
+        return;
     }
 
     if (item.enabled) {

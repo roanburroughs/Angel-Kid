@@ -1,5 +1,10 @@
 if oPlayer.state != oPlayer.stateDEAD {
-    draw_sprite_ext(sHealthSystem, 8, 70, 70, 2, 2, 0, c_white, 1);
+    draw_sprite_ext(
+		sHealthSystem, 8 - global.HEALTH, 
+		70, 70, 
+		2, 2, 0, 
+		c_white, 1
+	);
 }
 else {
     draw_sprite_ext(sHealthSystemBroken, oPlayer.image_index, 70, 70, 2, 2, 0, c_white, 1);

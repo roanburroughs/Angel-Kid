@@ -2,6 +2,13 @@ if (transition_is_active()) {
     exit;
 }
 
+if (optionsOpen) {
+    if (!instance_exists(oOptionsMenu)) {
+        optionsOpen = false;
+    }
+    exit;
+}
+
 if (noticeTimer > 0) {
     noticeTimer -= 1;
 }
