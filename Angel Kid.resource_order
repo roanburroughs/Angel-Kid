@@ -23,6 +23,7 @@
     {"name":"gameCamera","order":16,"path":"objects/gameCamera/gameCamera.yy",},
     {"name":"oGoldUi","order":15,"path":"objects/oGoldUi/oGoldUi.yy",},
     {"name":"oHalo","order":16,"path":"objects/oHalo/oHalo.yy",},
+    {"name":"shdTextBlackParts","order":2,"path":"shaders/shdTextBlackParts/shdTextBlackParts.yy",},
     {"name":"sAK_Climb","order":10,"path":"sprites/sAK_Climb/sAK_Climb.yy",},
     {"name":"sAK_Death","order":12,"path":"sprites/sAK_Death/sAK_Death.yy",},
     {"name":"sAK_Fly","order":7,"path":"sprites/sAK_Fly/sAK_Fly.yy",},

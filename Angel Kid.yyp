@@ -44,7 +44,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2024.14.4.222",
+    "IDEVersion":"2024.1400.5.1065",
   },
   "name":"Angel Kid",
   "resources":[
@@ -94,6 +94,7 @@
     {"id":{"name":"shdDotPixelTransition","path":"shaders/shdDotPixelTransition/shdDotPixelTransition.yy",},},
     {"id":{"name":"shdSonicFadeToBlackTransition","path":"shaders/shdSonicFadeToBlackTransition/shdSonicFadeToBlackTransition.yy",},},
     {"id":{"name":"shdSonicFadeToWhiteTransition","path":"shaders/shdSonicFadeToWhiteTransition/shdSonicFadeToWhiteTransition.yy",},},
+    {"id":{"name":"shdTextBlackParts","path":"shaders/shdTextBlackParts/shdTextBlackParts.yy",},},
     {"id":{"name":"sndAngelincLogo","path":"sounds/sndAngelincLogo/sndAngelincLogo.yy",},},
     {"id":{"name":"sndCoin","path":"sounds/sndCoin/sndCoin.yy",},},
     {"id":{"name":"sndEnemyHurt","path":"sounds/sndEnemyHurt/sndEnemyHurt.yy",},},
@@ -244,9 +245,9 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rmMainMenu","path":"rooms/rmMainMenu/rmMainMenu.yy",},},
-    {"roomId":{"name":"rmTitleScreen","path":"rooms/rmTitleScreen/rmTitleScreen.yy",},},
     {"roomId":{"name":"rmSplashScreen","path":"rooms/rmSplashScreen/rmSplashScreen.yy",},},
+    {"roomId":{"name":"rmTitleScreen","path":"rooms/rmTitleScreen/rmTitleScreen.yy",},},
+    {"roomId":{"name":"rmMainMenu","path":"rooms/rmMainMenu/rmMainMenu.yy",},},
     {"roomId":{"name":"rmStage1","path":"rooms/rmStage1/rmStage1.yy",},},
   ],
   "templateType":"game",
