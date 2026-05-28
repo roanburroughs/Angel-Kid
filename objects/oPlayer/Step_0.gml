@@ -12,7 +12,7 @@ keyPUNCH_RELEASED = keyboard_check_released(ord("Z"));
 keyJUMP = keyboard_check_pressed(vk_space) || keyUP;
 keyPOSE = keyboard_check_pressed(ord("C"));
 
-state()
+state.runSTEP();
 
 if (invulFrames > 0) {
     invulFrames -= 1;

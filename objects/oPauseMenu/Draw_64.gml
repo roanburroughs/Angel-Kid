@@ -32,7 +32,7 @@ draw_text(guiWidth * 0.5, panelY1 + 58, "PAUSED");
 var startY = panelY1 + 148;
 var spacingY = 68;
 for (var i = 0; i < array_length(menuItems); i++) {
-    var y = startY + i * spacingY;
+    y = startY + i * spacingY;
     var isCurrent = (i == selectedIndex);
 
     draw_set_color(isCurrent ? c_yellow : c_white);

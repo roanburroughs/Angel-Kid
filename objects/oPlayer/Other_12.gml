@@ -4,11 +4,10 @@ resetACTION_STATE = function() {
     attackApplied = false;
     chargeFrames = 0;
     currentAttackPower = ATTACK.POWER;
-    currentAttackRange = ATTACK.RANGE;
     haloThrown = false;
 };
 
-stateFREE = function() {    
+stateFREE = new stateFUNCS(function() {    
     // Movement logic
     SP.H = keyRIGHT - keyLEFT;
     SP.H *= keyRUN ? SP.RUN : SP.WALK;
@@ -71,15 +70,14 @@ stateFREE = function() {
     }
     else if (keyPUNCH_PRESSED) {
         chargeFrames = 0;
-        state = statePUNCH_CHARGING;
+        state = isRUNNING ? stateSPIN_ATTACK : statePUNCH_CHARGING;
     }
     else if (keyPOSE) {
         state = stateGOOBER_POSE_SCARE;
     }
+});
 
-}
-
-stateJUMPING = function() {
+stateJUMPING = new stateFUNCS(function() {
     SP.H = keyRIGHT - keyLEFT;
     SP.H *= keyboard_check(vk_shift) ? SP.RUN : SP.WALK;
 	
@@ -104,9 +102,9 @@ stateJUMPING = function() {
 	if (SP.H != 0) {
         image_xscale = sign(SP.H);
     }
-}
+});
 
-stateFLYING = function() {
+stateFLYING = new stateFUNCS(function() {
     SP.H = keyRIGHT - keyLEFT;
     SP.V = keyDOWN - keyUP;
     SP.H *= SP.FLY;
@@ -124,9 +122,9 @@ stateFLYING = function() {
     if !keyFLY {
         state = stateFREE;
     }
-}
+});
 
-statePUNCH_CHARGING = function() {
+statePUNCH_CHARGING = new stateFUNCS(function() {
     SP.H = 0;
     if (place_meeting(x, y + 2, COLLISIONS)) {
         SP.V = 0;
@@ -135,7 +133,8 @@ statePUNCH_CHARGING = function() {
         SP.V += SP.GRV;
     }
     move_and_collide(SP.H, SP.V, COLLISIONS);
-
+	
+	chargeFrames++;
     if (sprite_index != SPRITES.PUNCH_CHARGE) {
         sprite_index = SPRITES.PUNCH_CHARGE;
         image_index = 0;
@@ -145,9 +144,9 @@ statePUNCH_CHARGING = function() {
     if (keyPUNCH_RELEASED) {
         beginPUNCH();
     }
-}
+});
 
-statePUNCHING = function() {
+statePUNCHING = new stateFUNCS(function() {
     // Movement logic
     SP.H = 0;
     if (place_meeting(x, y + 2, COLLISIONS)) {
@@ -163,20 +162,71 @@ statePUNCHING = function() {
         sprite_index = SPRITES.PUNCH;
         image_index = 0;
     }
-
-    if (!attackApplied && image_index >= ATTACK.TRIGGER_FRAME) {
-        attackApplied = true;
-        playerATTACK();
-    }
+	
+	var bonus = chargeFrames > ATTACK.CHARGE_TIME;
+	var handWidth = sprite_get_width(sAK_PunchHand) * punchHandScale;
+	var handHeight = sprite_get_height(sAK_PunchHand) * punchHandScale;
+	if image_index >= 1
+	{
+		punchHandOffset = lerp(punchHandOffset, image_index >= 3 ?
+			0 : image_xscale * (30 + bonus * 5), 0.2);
+		
+		punchHandScale = lerp(punchHandScale, image_index >= 3 ?
+			0 : 1 + bonus * 3, 0.2);
+	}
+	
+	var targets = [
+        collision_rectangle(x + punchHandOffset, y - handHeight/2,
+			x + punchHandOffset + handWidth, y + handHeight/2, oCageTemplate, false, true),
+        collision_rectangle(x + punchHandOffset, y - handHeight/2,
+			x + punchHandOffset + handWidth, y + handHeight/2, oEnemyTemplate, false, true)
+    ];
+	playerHIT_TARGETS(targets);
+	
     if image_index >= image_number - 1 {
         chargeFrames = 0;
         currentAttackPower = ATTACK.POWER;
-        currentAttackRange = ATTACK.RANGE;
         state = stateFREE;
     }
-}
+}, function() {
+	draw_self();
+	if image_index < 1 || image_index >= 4 { return; }
+	
+	draw_sprite_ext(sAK_PunchHand, 0, x + punchHandOffset, y,
+		punchHandScale * image_xscale, punchHandScale, 0, c_white, 1);
+});
 
-stateHALO_THROW = function() {
+stateSPIN_ATTACK = new stateFUNCS(function()
+{
+	if (place_meeting(x, y + 2, COLLISIONS)) {
+        SP.V = 0;
+    }
+    else if (SP.V < SP.MAX_FALL) {
+        SP.V += SP.GRV;
+    }
+	
+	move_and_collide(SP.H, SP.V, COLLISIONS);
+	
+	var targets = [
+        instance_place(x, y, oCageTemplate),
+        instance_place(x, y, oEnemyTemplate),
+    ];
+
+    playerHIT_TARGETS(targets);
+	
+	if (sprite_index != SPRITES.SPIN_ATTACK) {
+        sprite_index = SPRITES.SPIN_ATTACK;
+        image_index = 0;
+        image_speed = 1;
+    }
+	
+	if image_index >= image_number - 1 {
+        currentAttackPower = ATTACK.POWER;
+        state = stateFREE;
+    }
+});
+
+stateHALO_THROW = new stateFUNCS(function() {
     SP.H = 0;
     if (place_meeting(x, y + 2, COLLISIONS)) {
         SP.V = 0;
@@ -205,9 +255,9 @@ stateHALO_THROW = function() {
 	if (image_index >= image_number - 1) {
 	    state = stateFREE;
 	}
-}
+});
 
-stateAIR_TO_GROUND = function() {
+stateAIR_TO_GROUND = new stateFUNCS(function() {
     // Movement logic
     SP.H = 0;
     if (place_meeting(x, y + 2, COLLISIONS)) {
@@ -227,9 +277,9 @@ stateAIR_TO_GROUND = function() {
     if image_index >= image_number - 1 {
         state = stateFREE;
     }
-}
+});
 
-stateGOOBER_POSE_SCARE = function() {
+stateGOOBER_POSE_SCARE = new stateFUNCS(function() {
     SP.H = 0;
     SP.V = 0;
     move_and_collide(SP.H, SP.V, COLLISIONS);
@@ -242,9 +292,9 @@ stateGOOBER_POSE_SCARE = function() {
     if image_index >= image_number - 1 {
         state = stateFREE;
     }
-}
+});
 
-stateHIT = function() {
+stateHIT = new stateFUNCS(function() {
     if (sprite_index != SPRITES.HIT) {
         sprite_index = SPRITES.HIT;
         image_index = 0;
@@ -270,9 +320,9 @@ stateHIT = function() {
         hurtVsp = 0;
         state = stateFREE;
     }
-}
+});
 
-stateDEAD = function() {
+stateDEAD = new stateFUNCS(function() {
     SP.H = 0;
     SP.V = 0;
     move_and_collide(SP.H, SP.V, COLLISIONS);
@@ -285,9 +335,9 @@ stateDEAD = function() {
     if image_index >= image_number - 1 {
         recoverFROM_DEATH();
     }
-}
+});
 
-stateVICTORY_DANCE = function() {
+stateVICTORY_DANCE = new stateFUNCS(function() {
     SP.H = 0;
     SP.V = 0;
     move_and_collide(SP.H, SP.V, COLLISIONS);
@@ -296,6 +346,6 @@ stateVICTORY_DANCE = function() {
         sprite_index = SPRITES.VICTORY_DANCE;
         image_index = 0;
     }
-}
+});
 
 state = stateFREE;

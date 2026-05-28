@@ -16,7 +16,7 @@ function applySETTINGS(settings)
 	}
 
 	settings.MASTER_VOLUME = clamp(settings.MASTER_VOLUME, 0, 1);
-	audio_master_gain(settings.MASTER_VOLUME, 0);
+	audio_master_gain(settings.MASTER_VOLUME);
 
 	if (window_get_fullscreen() != settings.FULLSCREEN) {
 		window_set_fullscreen(settings.FULLSCREEN);

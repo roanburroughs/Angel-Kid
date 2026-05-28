@@ -94,27 +94,9 @@ takeKNOCKBACK = function(_amount, _sourceX, _knockbackH, _knockbackV) {
     return true;
 };
 
-playerATTACK = function() {
-    var offsetX = image_xscale * currentAttackRange;
-    var leftBound = x;
-    var rightBound = x;
-
-    if (offsetX < 0) {
-        leftBound += offsetX;
-    }
-    else {
-        rightBound += offsetX;
-    }
-
-    var targets = [
-        instance_place(rightBound, y, oCageTemplate),
-        instance_place(rightBound, y, oEnemyTemplate),
-        
-        collision_rectangle(leftBound, y - ATTACK.HEIGHT, rightBound, y + ATTACK.HEIGHT, oCageTemplate, false, true),
-        collision_rectangle(leftBound, y - ATTACK.HEIGHT, rightBound, y + ATTACK.HEIGHT, oEnemyTemplate, false, true)
-    ];
-
-    var didHit = false;
+playerHIT_TARGETS = function(targets)
+{
+	var didHit = false;
 
     for (var i = 0; i < array_length(targets); i += 1) {
         var target = targets[i];
@@ -132,15 +114,15 @@ playerATTACK = function() {
     if (didHit) {
         audio_play_sound(SOUNDS.HIT_IMPACT, 0, false);
     }
-};
+}
 
 beginPUNCH = function() {
     currentAttackPower = ATTACK.POWER;
-    currentAttackRange = ATTACK.RANGE;
+    punchHandOffset = 0;
+	punchHandScale = 0;
 
     if (chargeFrames >= ATTACK.CHARGE_TIME) {
         currentAttackPower = ATTACK.CHARGE_POWER;
-        currentAttackRange = ATTACK.CHARGE_RANGE;
     }
 
     attackApplied = false;

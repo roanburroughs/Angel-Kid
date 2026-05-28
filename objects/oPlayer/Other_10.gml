@@ -17,6 +17,7 @@ SPRITES = {
     POWER_GIVEN: sAK_PowerGiven,
     PUNCH_CHARGE: sAK_PunchCharge,
     PUNCH: sAK_Punch,
+	SPIN_ATTACK: sAK_SpinAttack,
     RUN: sAK_FullSpeed,
     VICTORY_DANCE: sAK_VictoryDance,
     WALK: sAK_Walk,
@@ -39,9 +40,7 @@ ATTACK = {
     CHARGE_RANGE: 40,
     CHARGE_TIME: 20,
     HEIGHT: 18,
-    POWER: 1,
-    RANGE: 28,
-    TRIGGER_FRAME: 2,
+    POWER: 1
 };
 
 HALO = {

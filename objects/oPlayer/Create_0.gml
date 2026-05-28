@@ -4,7 +4,6 @@ event_user(0);
 attackApplied = false;
 chargeFrames = 0;
 currentAttackPower = ATTACK.POWER;
-currentAttackRange = ATTACK.RANGE;
 haloInstanceId = noone;
 haloThrown = false;
 respawnX = x;
@@ -13,6 +12,9 @@ invulFrames = 0;
 hitstunFrames = 0;
 hurtHsp = 0;
 hurtVsp = 0;
+
+punchHandOffset = 0;
+punchHandScale = 0;
 
 if (room == rmStage1) {
     audio_stop_all();
