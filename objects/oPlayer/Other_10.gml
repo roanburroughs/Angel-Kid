@@ -21,6 +21,11 @@ SPRITES = {
     RUN: sAK_FullSpeed,
     VICTORY_DANCE: sAK_VictoryDance,
     WALK: sAK_Walk,
+    PUSH: sAK_Push,
+	SWIM: {
+        IDLE: sAK_SwimIdle,
+        MOVE: sAK_SwimMove,
+    }
 };
 
 SP = {
@@ -33,6 +38,7 @@ SP = {
     RUN: 4.5,
     V: 0,
     WALK: 2.5,
+	SWIM: 2.5,
 };
 
 ATTACK = {
@@ -62,7 +68,8 @@ SOUNDS = {
     JUMP: sndJump,
     LIFE_LOSS: sndLifeLoss,
     PUNCH_HOLD: sndPunchHold,
-    FLY: sndFly
+    FLY: sndFly,
+	WATER_SPLASH: sndWaterSplash
 };
 
 COLLISIONS = [
@@ -76,3 +83,11 @@ KNOCKBACK_H = 3.5;
 KNOCKBACK_V = 4.5;
 RESPAWN_INVUL_TIME = 90;
 RESPAWN_HEALTH = 8;
+
+PUSHABLE = [];
+SP.SWIM = 2.5;
+SPRITES.SWIM = {
+    IDLE: sAK_SwimIdle,
+    MOVE: sAK_SwimMove,
+};
+SOUNDS.WATER_SPLASH = sndWaterSplash;

@@ -2,7 +2,7 @@
   "$GMProject":"v1",
   "%Name":"Angel Kid",
   "AudioGroups":[
-    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -44,7 +44,7 @@
   "isEcma":false,
   "LibraryEmitters":[],
   "MetaData":{
-    "IDEVersion":"2026.0.0.15",
+    "IDEVersion":"2026.0.0.16",
   },
   "name":"Angel Kid",
   "resources":[
@@ -161,7 +161,10 @@
     {"id":{"name":"sAK_Punch","path":"sprites/sAK_Punch/sAK_Punch.yy",},},
     {"id":{"name":"sAK_PunchCharge","path":"sprites/sAK_PunchCharge/sAK_PunchCharge.yy",},},
     {"id":{"name":"sAK_PunchHand","path":"sprites/sAK_PunchHand/sAK_PunchHand.yy",},},
+    {"id":{"name":"sAK_Push","path":"sprites/sAK_Push/sAK_Push.yy",},},
     {"id":{"name":"sAK_SpinAttack","path":"sprites/sAK_SpinAttack/sAK_SpinAttack.yy",},},
+    {"id":{"name":"sAK_SwimIdle","path":"sprites/sAK_SwimIdle/sAK_SwimIdle.yy",},},
+    {"id":{"name":"sAK_SwimMove","path":"sprites/sAK_SwimMove/sAK_SwimMove.yy",},},
     {"id":{"name":"sAK_VictoryDance","path":"sprites/sAK_VictoryDance/sAK_VictoryDance.yy",},},
     {"id":{"name":"sAK_Walk","path":"sprites/sAK_Walk/sAK_Walk.yy",},},
     {"id":{"name":"sBlocko_Defeat_1","path":"sprites/sBlocko_Defeat_1/sBlocko_Defeat_1.yy",},},

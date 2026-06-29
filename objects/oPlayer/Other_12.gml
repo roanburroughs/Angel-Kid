@@ -11,6 +11,19 @@ stateFREE = new stateFUNCS(function() {
     // Movement logic
     SP.H = keyRIGHT - keyLEFT;
     SP.H *= keyRUN ? SP.RUN : SP.WALK;
+    
+    // Check if pushing something
+    var dir = sign(SP.H);
+    if (dir != 0 && array_length(PUSHABLE) > 0) {
+        for (var i = 0; i < array_length(PUSHABLE); i += 1) {
+            var pushInst = instance_place(x + (dir * 8), y, PUSHABLE[i]);
+            if (pushInst != noone) {
+                state = statePUSH;
+                return;
+            }
+        }
+    }
+    
     if (place_meeting(x, y + 2, COLLISIONS)) {
         SP.V = 0;
         if (keyJUMP) {
@@ -269,8 +282,8 @@ stateAIR_TO_GROUND = new stateFUNCS(function() {
     move_and_collide(SP.H, SP.V, COLLISIONS);
 
     // Transition from air to ground
-    if sprite_index != SPRITES.LANDING {
-        sprite_index = SPRITES.LANDING;
+    if sprite_index != SPRITES.IDLE {
+        sprite_index = SPRITES.IDLE;
         image_index = 0;
 		audio_play_sound(SOUNDS.HIT_LANDED, 0, false);
     }
@@ -345,6 +358,101 @@ stateVICTORY_DANCE = new stateFUNCS(function() {
     if sprite_index != SPRITES.VICTORY_DANCE {
         sprite_index = SPRITES.VICTORY_DANCE;
         image_index = 0;
+    }
+});
+
+stateSWIMMING = new stateFUNCS(function() {
+    // 4-directional swimming movement (similar to DK Country)
+    SP.H = keyRIGHT - keyLEFT;
+    SP.V = keyDOWN - keyUP;
+    SP.H *= SP.SWIM;
+    SP.V *= SP.SWIM;
+
+    move_and_collide(SP.H, SP.V, COLLISIONS);
+
+    // Transition to swimming state
+    var isMoving = (SP.H != 0 || SP.V != 0);
+    
+    if (isMoving) {
+        if (sprite_index != SPRITES.SWIM.MOVE) {
+            sprite_index = SPRITES.SWIM.MOVE;
+            image_index = 0;
+        }
+    } else {
+        if (sprite_index != SPRITES.SWIM.IDLE) {
+            sprite_index = SPRITES.SWIM.IDLE;
+            image_index = 0;
+        }
+    }
+    
+    // Update sprite direction based on movement
+    if (SP.H != 0) {
+        image_xscale = sign(SP.H);
+    }
+});
+
+statePUSH = new stateFUNCS(function() {
+    // Push state - moving while pushing an object
+    SP.H = keyRIGHT - keyLEFT;
+    SP.H *= keyRUN ? SP.RUN : SP.WALK;
+    
+    if (place_meeting(x, y + 2, COLLISIONS)) {
+        SP.V = 0;
+        if (keyJUMP) {
+            SP.V = -SP.JUMP;
+            state = stateJUMPING;
+            return;
+        }
+    }
+    else if (SP.V < SP.MAX_FALL) {
+        SP.V += SP.GRV;
+    }
+    
+    // Push the object
+    var dir = sign(SP.H);
+    var pushing = false;
+    if (dir != 0) {
+        for (var i = 0; i < array_length(PUSHABLE); i += 1) {
+            var inst = instance_place(x + (dir * 8), y, PUSHABLE[i]);
+            if (inst != noone) {
+                inst.x += dir;
+                pushing = true;
+                break;
+            }
+        }
+    }
+    
+    // If not pushing anymore, return to free state
+    if (!pushing) {
+        state = stateFREE;
+        return;
+    }
+    
+    move_and_collide(SP.H, SP.V, COLLISIONS);
+
+    var isRUNNING = (SP.H != 0 && keyRUN);
+    
+    if (isRUNNING) {
+        if (sprite_index != SPRITES.RUN) {
+            sprite_index = SPRITES.RUN;
+            image_index = 0;
+        }
+    }
+    else if (SP.H != 0) {
+        if (sprite_index != SPRITES.PUSH) {
+            sprite_index = SPRITES.PUSH;
+            image_index = 0;
+        }
+    }
+    else {
+        if (sprite_index != SPRITES.IDLE) {
+            sprite_index = SPRITES.IDLE;
+            image_index = 0;
+        }
+    }
+    
+    if (SP.H != 0) {
+        image_xscale = sign(SP.H);
     }
 });
 
