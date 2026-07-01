@@ -47,15 +47,16 @@ activateSELECTED = function() {
         var guiHeight = max(1, display_get_gui_height());
         var itemX = guiWidth * menuAnchorX;
         var itemY = guiHeight * menuAnchorY + ((selectedIndex - ((array_length(menuItems) - 1) * 0.5)) * menuSpacing);
-
-        transition_goto(
-            item.targetRoom,
-            itemX / guiWidth,
-            itemY / guiHeight,
-            60,
-            50,
-            shdSonicFadeToBlackTransition
-        );
+RoomTransition(item.targetRoom)
+show_message("we're doing this")
+ //       transition_goto(
+ //           item.targetRoom,
+ //           itemX / guiWidth,
+ //           itemY / guiHeight,
+//            60,
+ //           50,
+ //           shdSonicFadeToBlackTransition
+ //      );
         return;
     }
 

@@ -2,7 +2,7 @@
   "$GMProject":"v1",
   "%Name":"Angel Kid",
   "AudioGroups":[
-    {"$GMAudioGroup":"","%Name":"audiogroup_default","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
+    {"$GMAudioGroup":"v1","%Name":"audiogroup_default","exportDir":"","name":"audiogroup_default","resourceType":"GMAudioGroup","resourceVersion":"2.0","targets":-1,},
   ],
   "configs":{
     "children":[],
@@ -12,6 +12,7 @@
   "Folders":[
     {"$GMFolder":"","%Name":"Backgrounds","folderPath":"folders/Backgrounds.yy","name":"Backgrounds","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Tutorial Island","folderPath":"folders/Backgrounds/Tutorial Island.yy","name":"Tutorial Island","resourceType":"GMFolder","resourceVersion":"2.0",},
+    {"$GMFolder":"","%Name":"LoadingScreen","folderPath":"folders/LoadingScreen.yy","name":"LoadingScreen","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"HUD","folderPath":"folders/HUD.yy","name":"HUD","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Main Menu","folderPath":"folders/HUD/Main Menu.yy","name":"Main Menu","resourceType":"GMFolder","resourceVersion":"2.0",},
     {"$GMFolder":"","%Name":"Stage Intros","folderPath":"folders/HUD/Stage Intros.yy","name":"Stage Intros","resourceType":"GMFolder","resourceVersion":"2.0",},
@@ -68,6 +69,7 @@
     {"id":{"name":"oJayCopter","path":"objects/oJayCopter/oJayCopter.yy",},},
     {"id":{"name":"oJayCopterBomb","path":"objects/oJayCopterBomb/oJayCopterBomb.yy",},},
     {"id":{"name":"oLadder","path":"objects/oLadder/oLadder.yy",},},
+    {"id":{"name":"oLoadingScreen","path":"objects/oLoadingScreen/oLoadingScreen.yy",},},
     {"id":{"name":"oMainMenu","path":"objects/oMainMenu/oMainMenu.yy",},},
     {"id":{"name":"oMollyWopWally","path":"objects/oMollyWopWally/oMollyWopWally.yy",},},
     {"id":{"name":"oNPCTemplate","path":"objects/oNPCTemplate/oNPCTemplate.yy",},},
@@ -87,6 +89,7 @@
     {"id":{"name":"rmStage1","path":"rooms/rmStage1/rmStage1.yy",},},
     {"id":{"name":"rmTitleScreen","path":"rooms/rmTitleScreen/rmTitleScreen.yy",},},
     {"id":{"name":"fonts","path":"scripts/fonts/fonts.yy",},},
+    {"id":{"name":"RoomTransition","path":"scripts/RoomTransition/RoomTransition.yy",},},
     {"id":{"name":"scrConstructors","path":"scripts/scrConstructors/scrConstructors.yy",},},
     {"id":{"name":"scrSaving","path":"scripts/scrSaving/scrSaving.yy",},},
     {"id":{"name":"scrStats","path":"scripts/scrStats/scrStats.yy",},},
@@ -207,6 +210,8 @@
     {"id":{"name":"sHealthSystemBroken","path":"sprites/sHealthSystemBroken/sHealthSystemBroken.yy",},},
     {"id":{"name":"sJayCopter_Defeated","path":"sprites/sJayCopter_Defeated/sJayCopter_Defeated.yy",},},
     {"id":{"name":"sJayCopter_Flying","path":"sprites/sJayCopter_Flying/sJayCopter_Flying.yy",},},
+    {"id":{"name":"sLoadingBackground","path":"sprites/sLoadingBackground/sLoadingBackground.yy",},},
+    {"id":{"name":"sLoadingClock","path":"sprites/sLoadingClock/sLoadingClock.yy",},},
     {"id":{"name":"sMainMenuBg","path":"sprites/sMainMenuBg/sMainMenuBg.yy",},},
     {"id":{"name":"sMM_AngelMode","path":"sprites/sMM_AngelMode/sMM_AngelMode.yy",},},
     {"id":{"name":"sMM_Competition","path":"sprites/sMM_Competition/sMM_Competition.yy",},},
@@ -252,10 +257,10 @@
   "resourceType":"GMProject",
   "resourceVersion":"2.0",
   "RoomOrderNodes":[
-    {"roomId":{"name":"rmStage1","path":"rooms/rmStage1/rmStage1.yy",},},
-    {"roomId":{"name":"rmSplashScreen","path":"rooms/rmSplashScreen/rmSplashScreen.yy",},},
     {"roomId":{"name":"rmTitleScreen","path":"rooms/rmTitleScreen/rmTitleScreen.yy",},},
+    {"roomId":{"name":"rmSplashScreen","path":"rooms/rmSplashScreen/rmSplashScreen.yy",},},
     {"roomId":{"name":"rmMainMenu","path":"rooms/rmMainMenu/rmMainMenu.yy",},},
+    {"roomId":{"name":"rmStage1","path":"rooms/rmStage1/rmStage1.yy",},},
   ],
   "templateType":"game",
   "TextureGroups":[

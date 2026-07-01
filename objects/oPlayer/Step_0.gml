@@ -1,3 +1,5 @@
+if(instance_exists(oLoadingScreen)) exit //This prevents the object from working during a loading screen
+//In this case stops the player from moving while the game is loading
 // Controls
 keyLEFT = keyboard_check(vk_left) || keyboard_check(ord("A"));
 keyRIGHT = keyboard_check(vk_right) || keyboard_check(ord("D"));

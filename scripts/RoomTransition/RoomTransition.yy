@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"RoomTransition",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"RoomTransition",
+  "parent":{
+    "name":"LoadingScreen",
+    "path":"folders/LoadingScreen.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
